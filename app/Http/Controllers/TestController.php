@@ -12,7 +12,6 @@ class TestController extends Controller
 
     public function save(Request $request){
         $nombreCiudad = $request->get("nombreCiudad");
-        $nombreCiudad = $request->get("departamento");
         return view("test/test",compact("nombreCiudad"));
     }
 }
