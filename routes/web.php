@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PersonaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,7 @@ Route::get('/', function () {
 
 Route::get('/test',[\App\Http\Controllers\TestController::class,"index"]);
 Route::post('/test',[\App\Http\Controllers\TestController::class,"save"]);
+
+Route::get('personas',[PersonaController::class,"index"]);
+Route::post('personas',[PersonaController::class,"store"]);
+Route::get('personas/create',[PersonaController::class,"create"]);
