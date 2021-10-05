@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PersonaController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +25,13 @@ Route::post('/test',[\App\Http\Controllers\TestController::class,"save"]);
 Route::get('personas',[PersonaController::class,"index"]);
 Route::post('personas',[PersonaController::class,"store"]);
 Route::get('personas/create',[PersonaController::class,"create"]);
-Route::resource('students', \App\Http\Controllers\StudentController::class);
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(["auth"])->group(function () {
+    Route::resource('students', \App\Http\Controllers\StudentController::class);
+    Route::get('notas/{id}',[\App\Http\Controllers\StudentController::class,"notas"])->name("students.notas");
+});

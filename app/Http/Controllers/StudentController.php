@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +16,12 @@ class StudentController extends Controller
     {
         $students = Student::all();
         return view("students.index",compact("students"));
+    }
+
+    public function notas($id)
+    {
+        $student = Student::find($id);
+        return view("students.notas",compact("student"));
     }
 
     /**
