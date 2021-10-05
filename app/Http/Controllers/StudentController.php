@@ -23,7 +23,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return ("students.create");
+        return view("students.create");
     }
 
     /**
@@ -96,9 +96,9 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Student  $student
+     * @param  string $student
      */
-    public function destroy(Student $id)
+    public function destroy(string $id)
     {
        $student = Student::query()->find($id);
        if(!$student){

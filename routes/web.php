@@ -25,3 +25,7 @@ Route::get('personas',[PersonaController::class,"index"]);
 Route::post('personas',[PersonaController::class,"store"]);
 Route::get('personas/create',[PersonaController::class,"create"]);
 Route::resource('students', \App\Http\Controllers\StudentController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
