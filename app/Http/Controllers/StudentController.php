@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Materia;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -24,13 +25,28 @@ class StudentController extends Controller
         return view("students.notas",compact("student"));
     }
 
+    public function notasApi($id)
+    {
+        $student = Student::find($id);
+        return $student->notas;
+    }
+
+
+    public function materias($id)
+    {
+        $student = Student::find($id);
+        return view("students.materias",compact("student"));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
      */
     public function create()
     {
-        return view("students.create");
+        $materias = Materia::all();
+        return view("students.create",compact("materias"));
     }
 
     /**
@@ -54,6 +70,9 @@ class StudentController extends Controller
         // Manera B
         // Solo llenara los atributos que estan como fillable
         $student = Student::create($validated);
+        foreach ($request->get("materias") as $materia_id){
+            $student->materias()->attach($materia_id);
+        }
         return response()->redirectTo("/students");
     }
 
@@ -76,7 +95,11 @@ class StudentController extends Controller
     public function edit($id)
     {
         $student = Student::query()->find($id);
-        return view("students.edit",compact("student"));
+        $materiasId = $student->materias->map(function ($materia) {
+            return $materia->id;
+        })->toArray();
+        $materias = Materia::all();
+        return view("students.edit",compact("student","materiasId","materias"));
     }
 
     /**
@@ -97,6 +120,13 @@ class StudentController extends Controller
             throw new \Exception("No existe el estudiante");
         }
         $student->update($validated);
+        $student->materias()->detach();
+        if($request->get("materias")){
+            foreach ($request->get("materias") as $materia_id){
+                $student->materias()->attach($materia_id);
+            }
+        }
+
         return redirect("/students");
     }
 

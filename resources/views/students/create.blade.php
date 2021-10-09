@@ -21,6 +21,14 @@
                                 <label for="exampleFormControlInput1">Fecha de Registro</label>
                                 <input name="fecha_registro" required type="date" class="form-control" id="exampleFormControlInput1" >
                             </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Selecciona una materia</label>
+                                <select name="materias[]" multiple class="form-control" id="exampleFormControlSelect2">
+                                    @foreach($materias as $materia)
+                                        <option value="{{$materia->id}}">{{$materia->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <a href="{{route("students.index")}}" class="btn btn-danger">Cancelar</a>
                             <button class="btn btn-primary" type="submit">Guardar</button>
                         </form>

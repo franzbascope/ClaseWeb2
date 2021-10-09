@@ -17,7 +17,8 @@ class CreateNotasTable extends Migration
             $table->id();
             $table->integer("nota");
             $table->string("materia");
-            $table->integer("student_id");
+            $table->bigInteger("student_id")->unsigned();
+            $table->foreign("student_id")->references("id")->on("students")->onDelete("cascade");
             $table->timestamps();
         });
     }

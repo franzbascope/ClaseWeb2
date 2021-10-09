@@ -5,27 +5,22 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Lista de Estudiantes</div>
-                    <a style="text-align: left" href="{{route("students.create")}}" class="btn btn-link">Nuevo Estudiante</a>
+                    <div class="card-header">Material del estudiante {{$student->nombre}}</div>
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Codigo</th>
-                                <th scope="col">Fecha de Registro</th>
+                                <th scope="col">Materia</th>
+                                <th scope="col">Sigla</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($students as $student)
+                            @foreach($student->materias as $materia)
                                 <tr>
-                                    <td>{{ $student->nombre }}</td>
-                                    <td> {{ $student->codigo }} </td>
-                                    <td>{{ $student->fecha_registro }}</td>
+                                    <td>{{ $materia->name }}</td>
+                                    <td> {{ $materia->sigla }} </td>
                                     <td>
-                                        <a href="{{route("students.materias",$student->id)}}" class="btn btn-info">Ver Materias</a>
-                                        <a href="{{route("students.notas",$student->id)}}" class="btn btn-info">Ver Notas</a>
                                         <a href="{{route("students.edit",$student->id)}}" class="btn btn-info">Editar</a>
                                         <form action="{{route("students.destroy",$student->id)}}" method="POST" style="display: contents">
                                             @method("DELETE")

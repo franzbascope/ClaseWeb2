@@ -18,7 +18,7 @@ class NotasSeeder extends Seeder
         // crear estudiante para asignar notas
         $estudiante = new Student();
         $estudiante->nombre = "Test Estudiante";
-        $estudiante->codigo = 51946;
+        $estudiante->codigo = 528136;
         $estudiante->fecha_registro = "2021-10-05";
         $estudiante->save();
 

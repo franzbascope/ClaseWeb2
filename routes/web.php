@@ -31,7 +31,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::resource('materias', \App\Http\Controllers\MateriaController::class);
+Route::get('estudiantes/{id}',[\App\Http\Controllers\MateriaController::class,"estudiantes"])->name("materias.estudiantes");
+Route::resource('students', \App\Http\Controllers\StudentController::class);
+Route::get('students/notas/{id}',[\App\Http\Controllers\StudentController::class,"notas"])->name("students.notas");
+Route::get('student/materias/{id}',[\App\Http\Controllers\StudentController::class,"materias"])->name("students.materias");
 Route::middleware(["auth"])->group(function () {
-    Route::resource('students', \App\Http\Controllers\StudentController::class);
-    Route::get('notas/{id}',[\App\Http\Controllers\StudentController::class,"notas"])->name("students.notas");
+
+
 });

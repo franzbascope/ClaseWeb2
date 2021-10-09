@@ -5,29 +5,25 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Lista de Estudiantes</div>
-                    <a style="text-align: left" href="{{route("students.create")}}" class="btn btn-link">Nuevo Estudiante</a>
+                    <div class="card-header">Estudiantes de la materia {{$materia->name}}</div>
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Codigo</th>
-                                <th scope="col">Fecha de Registro</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($students as $student)
+                            @foreach($materia->students as $student)
                                 <tr>
                                     <td>{{ $student->nombre }}</td>
                                     <td> {{ $student->codigo }} </td>
-                                    <td>{{ $student->fecha_registro }}</td>
                                     <td>
-                                        <a href="{{route("students.materias",$student->id)}}" class="btn btn-info">Ver Materias</a>
-                                        <a href="{{route("students.notas",$student->id)}}" class="btn btn-info">Ver Notas</a>
-                                        <a href="{{route("students.edit",$student->id)}}" class="btn btn-info">Editar</a>
-                                        <form action="{{route("students.destroy",$student->id)}}" method="POST" style="display: contents">
+                                        <a href="{{route("materias.estudiantes",$materia->id)}}" class="btn btn-info">Ver Estudiantes</a>
+                                        <a href="{{route("materias.edit",$materia->id)}}" class="btn btn-info">Editar</a>
+                                        <form action="{{route("materias.destroy",$materia->id)}}" method="POST" style="display: contents">
                                             @method("DELETE")
                                             @csrf
                                             <button onclick="return confirm('Esta seguro de eliminar?')" type="submit" class="btn btn-danger">Delete</button>
